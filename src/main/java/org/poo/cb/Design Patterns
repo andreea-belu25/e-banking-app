@@ -1,0 +1,43 @@
+ * Singleton
+-- Lets you ensure that a class has only one instance, while providing a global access point to this instance --
+
+ * Iterator
+-- is a behavioral design pattern that allows sequential traversal through a complex data structure without exposing its internal details --
+
+ * Template Method
+-- Defines the skeleton of an algorithm in the superclass but lets subclasses override specific steps of the algorithm without changing its structure --
+
+Strategy
+-- is a behavioral design pattern that turns a set of behaviors into objects and makes them interchangeable inside original context object --
+
+ * Command
+-- is behavioral design pattern that converts requests or simple operations into objects --
+   If you see a set of related classes that represent specific actions (such as “Copy”, “Cut”, “Send”, “Print”, etc.),
+this may be a Command pattern. These classes should implement the same interface/abstract class.
+
+ * Builder
+-- is a creational design pattern, which allows constructing complex objects step by step --
+
+Adapter
+-- is a structural design pattern, which allows incompatible objects to collaborate --
+
+ * Factory Method
+-- Provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created --
+
+ * Prototype
+-- Lets you copy existing objects without making your code dependent on their classes --
+
+ * Decorator
+-- Lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors --
+
+Facade
+-- Provides a simplified interface to a library, a framework, or any other complex set of classes --
+
+Observer
+-- Lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they're observing --
+
+Strategy
+-- Lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable --
+
+ * Visitor
+-- Lets you separate algorithms from the objects on which they operate --
