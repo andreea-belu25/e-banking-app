@@ -4,11 +4,9 @@ package org.poo.cb;
 public class ExchangeRates implements ICSVReader {
     private final Integer noOfCurrencies = 6;
     private String[][] rates = new String[noOfCurrencies][noOfCurrencies];
+
     private static ExchangeRates exchangeRates;
     private ExchangeRates() {}
-    public String[][] getRates() {
-        return this.rates;
-    }
     public static ExchangeRates InstantaExchangeRates() {
         if (exchangeRates == null) {
             exchangeRates = new ExchangeRates();
@@ -16,6 +14,9 @@ public class ExchangeRates implements ICSVReader {
         return exchangeRates;
     }
 
+    public String[][] getRates() {
+        return this.rates;
+    }
     public Integer getNoOfCurrencies() {
         return noOfCurrencies;
     }

@@ -47,50 +47,59 @@ public class User {
     public HashMap<String, User> getFriends() {
         return friends;
     }
+    public LinkedHashMap<String, ObjectPortofolio> getPortofolio() {
+        return portofolio;
+    }
 
     public void addFriendToUser(User friend) {
         this.friends.put(friend.getEmail(), friend);
     }
-    public LinkedHashMap<String, ObjectPortofolio> getPortofolio() {
-        return portofolio;
-    }
+
     public boolean hasAccount(String currencyType) {
         if (this.getPortofolio().containsKey("#" + currencyType))
             return true;
         return false;
     }
+
     public boolean hasAction(String currencyType) {
         if (this.getPortofolio().containsKey(currencyType))
             return true;
         return false;
     }
+
     public void addObjectPortofolio(String type, String objectIdentifier, ObjectPortofolio objectPortofolio) {
         if (type.equals(String.valueOf(ObjectPortofolio.Type.ACCOUNT)))
             this.portofolio.put("#" + objectIdentifier, objectPortofolio);
         else
             this.portofolio.put(objectIdentifier, objectPortofolio);
     }
+
     public ObjectPortofolio getObjectPortofolio(String type, String key) {
         if (type.equals(String.valueOf(ObjectPortofolio.Type.ACCOUNT)))
             return this.portofolio.get("#" + key);
         return this.portofolio.get(key);
     }
+
     public Account getAccount(String currency) {
         ObjectPortofolio objectPortofolio = this.getObjectPortofolio(String.valueOf(ObjectPortofolio.Type.ACCOUNT), currency);
         return (Account) objectPortofolio;
     }
+
     public Double getAccountAmount(String currency) {
         Account account = this.getAccount(currency);
         return account.getAmount();
     }
+
     public void removeAccountMoney(String currency, String amount) {
         Account account = this.getAccount(currency);
         account.removeAmount(amount);
     }
+
     public void addAccountMoney(String currency, String amount) {
         Account account = this.getAccount(currency);
         account.addAmount(amount);
     }
+
     public boolean hasFriend (String emailFriend) {
         return this.getFriends().containsKey(emailFriend);
     }

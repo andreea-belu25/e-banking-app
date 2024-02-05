@@ -20,20 +20,20 @@ public class StockValues implements ICSVReader {
     public void setValues(HashMap<String, ArrayList<Double>> values) {
         this.values = values;
     }
+    public HashMap<String, ArrayList<Double>> getValues() {
+        return this.values;
+    }
 
     public void accept(ICSVVisitor visitor, String path) {
         visitor.visit(this, path);
-    }
-    public HashMap<String, ArrayList<Double>> getValues() {
-        return this.values;
     }
 
     public Double getStockValueOnDay(String company, Integer day) {
         HashMap<String, ArrayList<Double>> values = this.getValues();
         ArrayList<Double> stockValues = values.get(company);
-        double value = stockValues.get(day);
-        return value;
+        return stockValues.get(day);
     }
+
     public Double getStockValue(String company) {
         return this.getStockValueOnDay(company, 0);
     }
@@ -41,8 +41,8 @@ public class StockValues implements ICSVReader {
         HashMap<String, ArrayList<Double>> values = this.getValues();
         ArrayList<String> recommendedStocks = new ArrayList<>();
         for (String key : values.keySet()) {
-            Double fiveDaysSum = (double) 0;
-            Double allDaysSum = (double) 0;
+            double fiveDaysSum = 0.0;
+            double allDaysSum = 0.0;
 
             int offset = 100000000;
             if (key.equals("Stock") || key.isEmpty())
@@ -51,18 +51,15 @@ public class StockValues implements ICSVReader {
                 Double a = fiveDaysSum;
                 fiveDaysSum = fiveDaysSum * offset + this.getStockValueOnDay(key, index) * offset;
                 fiveDaysSum = fiveDaysSum / offset;
-                // System.out.println(fiveDaysSum + " | " + a + " | " + this.getStockValueOnDay(key, index));
             }
 //            allDaysSum += fiveDaysSum;
             for (int index = 0; index < 10; index++) {
                 Double a = allDaysSum;
                 allDaysSum = allDaysSum * offset + this.getStockValueOnDay(key, index) * offset;
                 allDaysSum = allDaysSum / offset;
-//                System.out.println(allDaysSum + " | " + a + " | " + this.getStockValueOnDay(key, index));
             }
-            Double averageFiveDays = fiveDaysSum * 0.20f;
-            Double averageAllDays = allDaysSum * 0.10f;
-//            System.out.println(key + " | " + averageFiveDays + " | " + averageAllDays);
+            double averageFiveDays = fiveDaysSum * 0.20f;
+            double averageAllDays = allDaysSum * 0.10f;
             if (averageFiveDays >= averageAllDays) {
                 recommendedStocks.add(key);
             }

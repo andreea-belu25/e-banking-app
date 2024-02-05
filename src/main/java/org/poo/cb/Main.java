@@ -1,28 +1,24 @@
 package org.poo.cb;
 
+import org.poo.cb.Commands.*;
+
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+
         if(args == null) {
             System.out.println("Running Main");
             return;
         }
 
-
         String src = "src/main/resources/";
-//        String argss = "";
-//        for (int i = 0; i < args.length; i++)
-//            argss += args[i] + "|";
-//        System.out.println(argss);
-//         args = new String[]{"a", "b", "c"};
 
-        UserService userService = UserService.InstantaUserService();  //  Singleton
         ParseInput input = new ParseInput();
-        ArrayList<ArrayList<String>> raggedMatrix = new ArrayList<>();
+        ArrayList<ArrayList<String>> raggedMatrix;
         raggedMatrix = input.read(src + args[2]);
-
         CSVVisitor visitor = new CSVVisitor();
+
         ExchangeRates inputExchangeRates = ExchangeRates.InstantaExchangeRates();
         inputExchangeRates.accept(visitor, src + args[0]);
         StockValues inputStockValues = StockValues.InstantaStockValues();
@@ -35,58 +31,68 @@ public class Main {
                 String action = parts[0] + " " + parts[1];
 
                 if (action.equals("CREATE USER")) {
-                    userService.splitElementsCreateUser(parts);
+                    Command command = new CommandCreateUser();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("ADD FRIEND")) {
-                    userService.splitElementsAddFriend(parts);
+                    Command command = new CommandAddFriend();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("LIST USER")) {
-                    userService.splitElementsListUser(parts);
+                    Command command = new CommandListUser();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("ADD ACCOUNT")) {
-                    userService.splitElementsAddAccount(parts);
+                    Command command = new CommandAddAccount();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("ADD MONEY")) {
-                    userService.splitElementsAddMoney(parts);
+                    Command command = new CommandAddMoney();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("LIST PORTFOLIO")) {
-                    userService.splitElementsListPortofolio(parts);
+                    Command command = new CommandListPortofolio();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("TRANSFER MONEY")) {
-                    userService.splitElementsTransferMoney(parts);
+                    Command command = new CommandTransferMoney();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("BUY STOCKS")) {
-                    userService.splitElementsBuyStocks(parts);
+                    Command command = new CommandBuyStocks();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("EXCHANGE MONEY")) {
-                    userService.splitElementsExchangeMoney(parts);
+                    Command command = new CommandExchangeMoney();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("RECOMMEND STOCKS")) {
-                    userService.recommendStocks();
+                    Command command = new CommandRecommendStocks();
+                    command.execute(parts);
                     continue;
                 }
 
                 if (action.equals("BUY PREMIUM")) {
-                    userService.splitElementsBuyPremium(parts);
-                    continue;
+                    Command command = new CommandBuyPremium();
+                    command.execute(parts);
                 }
             }
         }

@@ -13,6 +13,7 @@ public class UserService {
             userService = new UserService();
         return userService;
     }
+
     public void createUser(String email, String firstName, String lastName, String address, HashMap<String, User> friends) throws IOException {
         User user = new User(email, firstName, lastName, address);
         if (users.containsKey(email)) {
@@ -23,6 +24,7 @@ public class UserService {
 
         users.put(email, user);
     }
+
     public void splitElementsCreateUser(String[] parts) {
         String email = parts[2];
         String firstName = parts[3];
@@ -74,6 +76,7 @@ public class UserService {
         String emailFriend = parts[3];
         addFriend(emailUser, emailFriend);
     }
+
     public void listUser(String email) {
         User userToList = getUserByEmail(email);
         if (!users.containsKey(email)) {
@@ -95,15 +98,18 @@ public class UserService {
             message = message + "]}";
         System.out.println(message);
     }
+
     public void splitElementsListUser(String[] parts) {
         String email = parts[2];
         listUser(email);
     }
+
     public void addPortofolioObject(String type, String objectIdentifier, ArrayList<Object> params, User user) {
         PortofolioFactory portofolioFactory = PortofolioFactory.InstantaPortofolioFactory();
         ObjectPortofolio objectPortofolio = portofolioFactory.createPortofolioObject(type, params);
         user.addObjectPortofolio(type, objectIdentifier, objectPortofolio);
     }
+
     public void addAccount(String email, String currencyType) {
         User user = getUserByEmail(email);
         if (user.hasAccount(currencyType)) {
@@ -117,18 +123,21 @@ public class UserService {
         params.add(0.00);
         addPortofolioObject(String.valueOf(ObjectPortofolio.Type.ACCOUNT), currencyType, params, user);
     }
+
     public void splitElementsAddAccount (String[] parts) {
         String email = parts[2];
         String currencyType = parts[3];
 
         addAccount(email, currencyType);
     }
+
     public void addMoney (String email, String currency, String amount) {
         User user = getUserByEmail(email);
         ObjectPortofolio objectPortofolio = user.getObjectPortofolio(String.valueOf(ObjectPortofolio.Type.ACCOUNT), currency);
         Account account = (Account) objectPortofolio;
         account.addAmount (amount);
     }
+
     public void splitElementsAddMoney (String[] parts) {
         String email = parts[2];
         String currency = parts[3];
@@ -136,6 +145,7 @@ public class UserService {
 
         addMoney(email, currency, amount);
     }
+
     public void listPortofolio (String email) {
         if (!users.containsKey(email)) {
             String message =  String.format("User with %s doesn’t exist", email);
@@ -165,10 +175,12 @@ public class UserService {
         String message = "{\"stocks\":[" + messageStocks + "]," + "\"accounts\":[" + messageAccounts + "]}";
         System.out.println(message);
     }
+
     public void splitElementsListPortofolio (String[] parts) {
         String email = parts[2];
         listPortofolio(email);
     }
+
     public void transferMoney(String email, String emailFriend, String currency, String amount) {
         User user = getUserByEmail(email);
         if(!user.hasFriend(emailFriend)) {
@@ -188,6 +200,7 @@ public class UserService {
         User friend = getUserByEmail(emailFriend);
         friend.addAccountMoney(currency, amount);
     }
+
     public void splitElementsTransferMoney(String[] parts) {
         String email = parts[2];
         String emailFriend = parts[3];
@@ -196,6 +209,7 @@ public class UserService {
 
         transferMoney(email, emailFriend, currency, amount);
     }
+
     public void buyStocks(String email, String company, String noOfStocks) {
         User user = getUserByEmail(email);
         Double amountUSD = user.getAccountAmount("USD");
@@ -226,6 +240,7 @@ public class UserService {
             addPortofolioObject(String.valueOf(ObjectPortofolio.Type.ACTION), company, params, user);
         }
     }
+
     public void splitElementsBuyStocks(String[] parts) {
         String email = parts[2];
         String company = parts[3];
@@ -233,6 +248,7 @@ public class UserService {
 
         buyStocks(email, company, noOfStocks);
     }
+
     public void exchangeMoney(String email, String sourceCurrency, String destinationCurrency, String amount) {
         ExchangeRates exchangeRates = ExchangeRates.InstantaExchangeRates();
         Double exchangeAmount = exchangeRates.getExchangeAmount(sourceCurrency, destinationCurrency, amount);
@@ -250,6 +266,7 @@ public class UserService {
         user.removeAccountMoney(sourceCurrency, exchangeAmount.toString());
         user.addAccountMoney(destinationCurrency, amount);
     }
+
     public void splitElementsExchangeMoney(String[] parts) {
         String email = parts[2];
         String sourceCurrency = parts[3];
@@ -258,6 +275,7 @@ public class UserService {
 
         exchangeMoney(email, sourceCurrency, destinationCurrency, amount);
     }
+
     public void recommendStocks() {
         StockValues stockValues = StockValues.InstantaStockValues();
         ArrayList<String> recommendedStocks = stockValues.recommendStocks();
@@ -271,6 +289,7 @@ public class UserService {
         }
         System.out.println(message);
     }
+
     public void buyPremium(String email) {
         if (!users.containsKey(email)) {
             String message = String.format("User with %s doesn’t exist", email);
@@ -291,6 +310,7 @@ public class UserService {
         user.removeAccountMoney("USD", "100");
         user.setHasPremium(true);
     }
+
     public void splitElementsBuyPremium(String[] parts) {
         String email = parts[2];
         buyPremium(email);

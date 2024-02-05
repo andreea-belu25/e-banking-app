@@ -10,6 +10,7 @@ public class PortofolioFactory {
             portofolioFactory = new PortofolioFactory();
         return portofolioFactory;
     }
+
     public ObjectPortofolio createPortofolioObject(String type, ArrayList<Object> params) {
         if (type.equals(String.valueOf(ObjectPortofolio.Type.ACTION)))
             return new Action((String) params.get(0), (Integer) params.get(1));

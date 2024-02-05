@@ -8,18 +8,20 @@ public class Account extends ObjectPortofolio {
         this.currencyType = currencyType;
         this.amount = amount;
     }
+
+    public String getCurrencyType() {
+        return currencyType;
+    }
+    public Double getAmount() {
+        return amount;
+    }
+
     public void addAmount (String amount) {
         this.amount = this.amount + Double.parseDouble(amount);
     }
     public void removeAmount (String amount) {
         this.amount = this.amount - Double.parseDouble(amount);
     }
-    public String getCurrencyType() {
-        return currencyType;
-    }
 
-    public Double getAmount() {
-        return amount;
-    }
 
 }

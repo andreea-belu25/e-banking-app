@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class ParseInput {
     public ParseInput() {
     }
+
     public void addElement(ArrayList<ArrayList<String>> raggedMatrix, int numberOfRow, String string) {
         while (raggedMatrix.size() <= numberOfRow)
             raggedMatrix.add(new ArrayList<>());
@@ -15,8 +16,9 @@ public class ParseInput {
         ArrayList<String> row = raggedMatrix.get(numberOfRow);
         row.add(string);
     }
+
     public ArrayList<ArrayList<String>> read (String path) {
-        String filePath = path; //"../../../../resources/test9_bonus/commands.txt";
+        String filePath = path;
         File fileToRead = new File(filePath);
 
         ArrayList<ArrayList<String>> raggedMatrix = new ArrayList<>();
