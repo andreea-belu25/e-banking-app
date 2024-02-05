@@ -1,10 +1,7 @@
 package org.poo.cb;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
-public class ExchangeRates {
+public class ExchangeRates implements ICSVReader {
     private final Integer noOfCurrencies = 6;
     private String[][] rates = new String[noOfCurrencies][noOfCurrencies];
     private static ExchangeRates exchangeRates;
@@ -18,22 +15,15 @@ public class ExchangeRates {
         }
         return exchangeRates;
     }
-    public void parseInput(String path) {
-        try {
-            String filePath = path; // "../../../../resources/common/exchangeRates.csv";
-            File fileToRead = new File(filePath);
-            Scanner input = new Scanner(fileToRead);
 
-            for (int i = 0; i < noOfCurrencies; i++) {
-                String line = input.nextLine();
-                String[] values = line.split(",");
-
-                System.arraycopy(values, 0, this.rates[i], 0, noOfCurrencies);
-            }
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
-        }
+    public Integer getNoOfCurrencies() {
+        return noOfCurrencies;
     }
+
+    public void accept(ICSVVisitor visitor, String path) {
+        visitor.visit(this, path);
+    }
+
     public Double getExchangeAmount(String sourceCurrency, String destinationCurrency, String amount) {
         String[][] rates = this.getRates();
 

@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class StockValues {
-    //  to do -- lista valori pe ultimele zile
+public class StockValues implements ICSVReader {
     private HashMap<String, ArrayList<Double>> values;
     private static StockValues stockValues;
     private StockValues() {}
@@ -17,35 +16,22 @@ public class StockValues {
         }
         return stockValues;
     }
+
+    public void setValues(HashMap<String, ArrayList<Double>> values) {
+        this.values = values;
+    }
+
+    public void accept(ICSVVisitor visitor, String path) {
+        visitor.visit(this, path);
+    }
     public HashMap<String, ArrayList<Double>> getValues() {
         return this.values;
     }
-    public void parseInput(String path) {
-        try {
-            String filePath = path; // "../../../../resources/test9_bonus/stockValues.csv";
-            File fileToRead = new File(filePath);
 
-            Scanner input = new Scanner(fileToRead);
-            this.values = new HashMap<>();
-            while (input.hasNextLine()) {
-                String line = input.nextLine();
-                String[] values = line.split(",");
-                if (values[0].equals("Stock") || values[0].isEmpty())
-                    continue;
-
-                this.values.put(values[0], new ArrayList<>());
-                for (int i = 1; i < values.length; i++)
-                    this.values.get(values[0]).add(0, Double.parseDouble(values[i]));
-            }
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
-        }
-    }
     public Double getStockValueOnDay(String company, Integer day) {
         HashMap<String, ArrayList<Double>> values = this.getValues();
         ArrayList<Double> stockValues = values.get(company);
         double value = stockValues.get(day);
-//        value = Math.floor(value * 100000) / 100000;
         return value;
     }
     public Double getStockValue(String company) {

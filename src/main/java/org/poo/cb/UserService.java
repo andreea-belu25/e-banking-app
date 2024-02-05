@@ -209,7 +209,6 @@ public class UserService {
             if (recommendedStocks.contains(company))
                 priceForStocks = priceForStocks - priceForStocks * 0.05;
         }
-//        priceForStocks = Math.floor(priceForStocks * 1000) / 1000;
 
         if (priceForStocks > amountUSD) {
             System.out.println("Insufficient amount in account for buying stock");
@@ -220,7 +219,12 @@ public class UserService {
         ArrayList<Object> params = new ArrayList<>();
         params.add(company);
         params.add(Integer.parseInt(noOfStocks));
-        addPortofolioObject(String.valueOf(ObjectPortofolio.Type.ACTION), company, params, user);
+        if (user.hasAction(company)) {
+            ObjectPortofolio action = user.getObjectPortofolio(String.valueOf(ObjectPortofolio.Type.ACTION), company);
+            action.addAmount(noOfStocks);
+        } else {
+            addPortofolioObject(String.valueOf(ObjectPortofolio.Type.ACTION), company, params, user);
+        }
     }
     public void splitElementsBuyStocks(String[] parts) {
         String email = parts[2];
@@ -257,8 +261,6 @@ public class UserService {
     public void recommendStocks() {
         StockValues stockValues = StockValues.InstantaStockValues();
         ArrayList<String> recommendedStocks = stockValues.recommendStocks();
-//        System.out.println(recommendedStocks);
-        // {"stocksToBuy":["MSFT","NFLX","META","GOOGL","GOOG","NVDA","AMZN"]}
         String message = "{\"stocksToBuy\":[";
         for (int index = 0; index < recommendedStocks.size(); index++) {
             message = message + String.format("\"%s\",", recommendedStocks.get(index));

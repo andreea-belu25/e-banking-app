@@ -59,6 +59,11 @@ public class User {
             return true;
         return false;
     }
+    public boolean hasAction(String currencyType) {
+        if (this.getPortofolio().containsKey(currencyType))
+            return true;
+        return false;
+    }
     public void addObjectPortofolio(String type, String objectIdentifier, ObjectPortofolio objectPortofolio) {
         if (type.equals(String.valueOf(ObjectPortofolio.Type.ACCOUNT)))
             this.portofolio.put("#" + objectIdentifier, objectPortofolio);

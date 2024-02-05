@@ -15,17 +15,18 @@ public class Main {
 //        for (int i = 0; i < args.length; i++)
 //            argss += args[i] + "|";
 //        System.out.println(argss);
-//         args = new String[]{"a", "b", "c"};
+         args = new String[]{"a", "b", "c"};
 
         UserService userService = UserService.InstantaUserService();  //  Singleton
         ParseInput input = new ParseInput();
         ArrayList<ArrayList<String>> raggedMatrix = new ArrayList<>();
         raggedMatrix = input.read(src + args[2]);
 
+        CSVVisitor visitor = new CSVVisitor();
         ExchangeRates inputExchangeRates = ExchangeRates.InstantaExchangeRates();
-        inputExchangeRates.parseInput(src + args[0]);
+        inputExchangeRates.accept(visitor, src + args[0]);
         StockValues inputStockValues = StockValues.InstantaStockValues();
-        inputStockValues.parseInput(src + args[1]);
+        inputStockValues.accept(visitor, src + args[1]);
 
         for (int indexRow = 0; indexRow < raggedMatrix.toArray().length; indexRow++) {
             ArrayList<String> row = raggedMatrix.get(indexRow);
