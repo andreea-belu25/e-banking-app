@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class CSVVisitor implements ICSVVisitor {
     public void visit(ExchangeRates rates, String path) {
         try {
-            String filePath = "../../../../resources/common/exchangeRates.csv";
+            String filePath = path; //"../../../../resources/common/exchangeRates.csv";
             File fileToRead = new File(filePath);
             Scanner input = new Scanner(fileToRead);
 
@@ -25,7 +25,7 @@ public class CSVVisitor implements ICSVVisitor {
     }
     public void visit(StockValues values, String path) {
         try {
-            String filePath = "../../../../resources/test9_bonus/stockValues.csv";
+            String filePath = path; //"../../../../resources/test9_bonus/stockValues.csv";
             File fileToRead = new File(filePath);
 
             Scanner input = new Scanner(fileToRead);
