@@ -1,18 +1,17 @@
 package org.poo.cb;
 
 public class Account extends ObjectPortofolio {
-    private String currencyType;
+    private final String currencyType;
     private Double amount;
 
     public Account(String currencyType, Double amount) {
         this.currencyType = currencyType;
         this.amount = amount;
     }
-    public void addMoney (String amount) {
-//        System.out.println(amount);
+    public void addAmount (String amount) {
         this.amount = this.amount + Double.parseDouble(amount);
     }
-    public void removeMoney (String amount) {
+    public void removeAmount (String amount) {
         this.amount = this.amount - Double.parseDouble(amount);
     }
     public String getCurrencyType() {

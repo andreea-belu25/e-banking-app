@@ -10,7 +10,13 @@ public class Action extends ObjectPortofolio {
     public String getName() {
         return name;
     }
-    public Integer getNoOfStocks() {
+    public Integer getAmount() {
         return noOfStocks;
+    }
+    public void addAmount (String amount) {
+        this.noOfStocks = this.noOfStocks + Integer.parseInt(amount);
+    }
+    public void removeAmount (String amount) {
+        this.noOfStocks = this.noOfStocks - Integer.parseInt(amount);
     }
 }

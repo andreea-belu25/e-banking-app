@@ -80,13 +80,11 @@ public class User {
     }
     public void removeAccountMoney(String currency, String amount) {
         Account account = this.getAccount(currency);
-        account.removeMoney(amount);
+        account.removeAmount(amount);
     }
     public void addAccountMoney(String currency, String amount) {
         Account account = this.getAccount(currency);
-        /// System.out.println("aa");
-//        System.out.println(amount);
-        account.addMoney(amount);
+        account.addAmount(amount);
     }
     public boolean hasFriend (String emailFriend) {
         return this.getFriends().containsKey(emailFriend);

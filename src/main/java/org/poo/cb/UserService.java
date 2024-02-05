@@ -127,7 +127,7 @@ public class UserService {
         User user = getUserByEmail(email);
         ObjectPortofolio objectPortofolio = user.getObjectPortofolio(String.valueOf(ObjectPortofolio.Type.ACCOUNT), currency);
         Account account = (Account) objectPortofolio;
-        account.addMoney (amount);
+        account.addAmount (amount);
     }
     public void splitElementsAddMoney (String[] parts) {
         String email = parts[2];
@@ -154,7 +154,7 @@ public class UserService {
                 String stringAmountDott = stringAmount.replace(',', '.');
                 messageAccounts = messageAccounts + ",{\"currencyName\":\"" + account.getCurrencyType() + "\",\"amount\":\"" + stringAmountDott + "\"}";
             } else if (object instanceof Action action) {
-                messageStocks = messageStocks + ",{\"stockName\":\"" + action.getName() + "\",\"amount\":" + action.getNoOfStocks() + "}";
+                messageStocks = messageStocks + ",{\"stockName\":\"" + action.getName() + "\",\"amount\":" + action.getAmount() + "}";
             }
         }
         if (!messageAccounts.isEmpty())
