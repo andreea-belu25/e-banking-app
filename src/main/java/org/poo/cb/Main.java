@@ -9,12 +9,13 @@ public class Main {
             return;
         }
 
+
         String src = "src/main/resources/";
 //        String argss = "";
 //        for (int i = 0; i < args.length; i++)
 //            argss += args[i] + "|";
 //        System.out.println(argss);
-        args = new String[]{"a", "b", "c"};
+//         args = new String[]{"a", "b", "c"};
 
         UserService userService = UserService.InstantaUserService();  //  Singleton
         ParseInput input = new ParseInput();

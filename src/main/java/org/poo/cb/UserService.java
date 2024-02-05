@@ -2,9 +2,7 @@ package org.poo.cb;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UserService {
     HashMap<String, User> users = new HashMap<>();
@@ -85,7 +83,7 @@ public class UserService {
         }
 
         String message = "{\"email\":\"" + userToList.getEmail() + "\"," + "\"firstname\":\"" + userToList.getFirstName() + "\"," + "\"lastname\":\""
-                + userToList.getLastName() + "\"," + "\"address\":\" " + userToList.getAddress() + "\"," + "\"friends\":[";
+                + userToList.getLastName() + "\"," + "\"address\":\"" + userToList.getAddress() + "\"," + "\"friends\":[";
         String emailFriend = "";
         for (Map.Entry<String, User> entry : userToList.getFriends().entrySet()) {
             emailFriend = entry.getKey();
@@ -146,7 +144,7 @@ public class UserService {
         }
 
         User user = getUserByEmail(email);
-        HashMap<String, ObjectPortofolio> portofolio = user.getPortofolio();
+        LinkedHashMap<String, ObjectPortofolio> portofolio = user.getPortofolio();
         String messageAccounts = "";
         String messageStocks = "";
         for (ObjectPortofolio object: portofolio.values()) {
@@ -156,7 +154,7 @@ public class UserService {
                 String stringAmountDott = stringAmount.replace(',', '.');
                 messageAccounts = messageAccounts + ",{\"currencyName\":\"" + account.getCurrencyType() + "\",\"amount\":\"" + stringAmountDott + "\"}";
             } else if (object instanceof Action action) {
-                messageStocks = messageStocks + ",{\"stockName\":\"" + action.getName() + "\",\"amount\":\"" + action.getNoOfStocks() + "\"}";
+                messageStocks = messageStocks + ",{\"stockName\":\"" + action.getName() + "\",\"amount\":" + action.getNoOfStocks() + "}";
             }
         }
         if (!messageAccounts.isEmpty())
@@ -211,9 +209,10 @@ public class UserService {
             if (recommendedStocks.contains(company))
                 priceForStocks = priceForStocks - priceForStocks * 0.05;
         }
+//        priceForStocks = Math.floor(priceForStocks * 1000) / 1000;
 
         if (priceForStocks > amountUSD) {
-            System.out.println("Insufficient amount in account for buying stocks");
+            System.out.println("Insufficient amount in account for buying stock");
             return;
         }
 
@@ -235,7 +234,6 @@ public class UserService {
         Double exchangeAmount = exchangeRates.getExchangeAmount(sourceCurrency, destinationCurrency, amount);
         User user = getUserByEmail(email);
 
-        System.out.println(exchangeAmount);
         if (!user.hasPremium() && exchangeAmount > 0.5 * user.getAccountAmount(sourceCurrency))
             exchangeAmount = exchangeAmount + 0.01 * exchangeAmount;
 

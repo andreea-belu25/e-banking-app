@@ -20,7 +20,7 @@ public class ExchangeRates {
     }
     public void parseInput(String path) {
         try {
-            String filePath = "../../../../resources/common/exchangeRates.csv";
+            String filePath = path; // "../../../../resources/common/exchangeRates.csv";
             File fileToRead = new File(filePath);
             Scanner input = new Scanner(fileToRead);
 
@@ -46,9 +46,6 @@ public class ExchangeRates {
         for (int indexColumn = 0; indexColumn < noOfCurrencies; indexColumn++)
             if (rates[0][indexColumn].equals(sourceCurrency))
                 indexSourceCurrency = indexColumn;
-
-        System.out.println(indexSourceCurrency);
-        System.out.println(indexDestinationCurrency);
 
         Double exchangeAmount = Double.parseDouble(rates[indexDestinationCurrency][indexSourceCurrency]);
         exchangeAmount = exchangeAmount * Double.parseDouble(amount);

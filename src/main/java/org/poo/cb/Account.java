@@ -9,6 +9,7 @@ public class Account extends ObjectPortofolio {
         this.amount = amount;
     }
     public void addMoney (String amount) {
+//        System.out.println(amount);
         this.amount = this.amount + Double.parseDouble(amount);
     }
     public void removeMoney (String amount) {

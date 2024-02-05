@@ -1,6 +1,7 @@
 package org.poo.cb;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class User {
     private String email;  // unique for each user
@@ -9,7 +10,7 @@ public class User {
     private boolean hasPremium = false;
 
     ///   to do portofoliu  --  conturi in diverse valute (currencies.txt) + actiuni (stocks.txt)
-    private HashMap<String, ObjectPortofolio> portofolio;
+    private LinkedHashMap<String, ObjectPortofolio> portofolio;
 
     private HashMap<String, User> friends;
 
@@ -24,7 +25,7 @@ public class User {
         this.lastName = lastName;
         this.address = address;
         this.friends = new HashMap<>();
-        this.portofolio = new HashMap<>();
+        this.portofolio = new LinkedHashMap<>();
     }
 
     public String getEmail() {
@@ -50,7 +51,7 @@ public class User {
     public void addFriendToUser(User friend) {
         this.friends.put(friend.getEmail(), friend);
     }
-    public HashMap<String, ObjectPortofolio> getPortofolio() {
+    public LinkedHashMap<String, ObjectPortofolio> getPortofolio() {
         return portofolio;
     }
     public boolean hasAccount(String currencyType) {
@@ -83,6 +84,8 @@ public class User {
     }
     public void addAccountMoney(String currency, String amount) {
         Account account = this.getAccount(currency);
+        /// System.out.println("aa");
+//        System.out.println(amount);
         account.addMoney(amount);
     }
     public boolean hasFriend (String emailFriend) {

@@ -1,0 +1,6 @@
+{"email":"john.doe@email.com","firstname":"John","lastname":"Doe","address":"1401 Stoltenberg Islands Geralynstad SD 36945","friends":[]}
+{"stocks":[{"stockName":"AMZN","amount":1}],"accounts":[{"currencyName":"USD","amount":"49844.82"},{"currencyName":"EUR","amount":"0.00"}]}
+{"stocks":[{"stockName":"AMZN","amount":1}],"accounts":[{"currencyName":"USD","amount":"1667.82"},{"currencyName":"EUR","amount":"30000.00"}]}
+{"stocks":[{"stockName":"AMZN","amount":1}],"accounts":[{"currencyName":"USD","amount":"51567.82"},{"currencyName":"EUR","amount":"30000.00"}]}
+{"stocks":[{"stockName":"AMZN","amount":1}],"accounts":[{"currencyName":"USD","amount":"51420.40"},{"currencyName":"EUR","amount":"30000.00"}]}
+{"stocks":[{"stockName":"AMZN","amount":1}],"accounts":[{"currencyName":"USD","amount":"3720.40"},{"currencyName":"EUR","amount":"60000.00"}]}

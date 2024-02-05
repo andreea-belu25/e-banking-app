@@ -16,7 +16,7 @@ public class ParseInput {
         row.add(string);
     }
     public ArrayList<ArrayList<String>> read (String path) {
-        String filePath = "../../../../resources/test2/commands.txt";
+        String filePath = path; // "../../../../resources/test9_bonus/commands.txt";
         File fileToRead = new File(filePath);
 
         ArrayList<ArrayList<String>> raggedMatrix = new ArrayList<>();
@@ -25,6 +25,8 @@ public class ParseInput {
             Integer indexInMatrix = 0;
             while (input.hasNextLine()) {
                 String data = input.nextLine();
+                if (data.isEmpty())
+                    break;
                 addElement (raggedMatrix, indexInMatrix, data);
                 indexInMatrix++;
             }
