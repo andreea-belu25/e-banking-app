@@ -1,6 +1,5 @@
 package org.poo.cb;
 
-
 public class ExchangeRates implements ICSVReader {
     private final Integer noOfCurrencies = 6;
     private String[][] rates = new String[noOfCurrencies][noOfCurrencies];
