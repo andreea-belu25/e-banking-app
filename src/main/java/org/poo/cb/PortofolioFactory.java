@@ -15,7 +15,7 @@ public class PortofolioFactory {
         if (type.equals(String.valueOf(ObjectPortofolio.Type.ACTION)))
             return new Action((String) params.get(0), (Integer) params.get(1));
 
-        //  vreau in fata lui currency sa pun un diez pentru a face distinctia intre action in eur si account in eur
+        // # + currency to make distinction between actions in euro and accounts in euro
         return new Account((String) params.get(0), (Double) params.get(1));
     }
 }
