@@ -52,7 +52,7 @@ public class StockValues implements ICSVReader {
                 fiveDaysSum = fiveDaysSum * offset + this.getStockValueOnDay(key, index) * offset;
                 fiveDaysSum = fiveDaysSum / offset;
             }
-//            allDaysSum += fiveDaysSum;
+
             for (int index = 0; index < 10; index++) {
                 Double a = allDaysSum;
                 allDaysSum = allDaysSum * offset + this.getStockValueOnDay(key, index) * offset;
