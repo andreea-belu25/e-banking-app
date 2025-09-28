@@ -49,7 +49,7 @@ Information
 - LIST USER <email>
 - LIST PORTFOLIO <email>
 
-Premium (Bonus)
+Premium
 --
 - BUY PREMIUM <email>
 
