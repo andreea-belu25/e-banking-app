@@ -9,15 +9,9 @@ public class User {
     private String address;
     private boolean hasPremium = false;
 
-    ///   to do portofoliu  --  conturi in diverse valute (currencies.txt) + actiuni (stocks.txt)
     private LinkedHashMap<String, ObjectPortofolio> portofolio;
 
     private HashMap<String, User> friends;
-
-    //  !!! Orice comanda de transfer sau cumparare de
-    //      actiuni/criptomonede va trebui sa se reflecte in starea conturilor și a portofoliului unui
-    //      utilizator !!!
-
 
     public User(String email, String firstName, String lastName, String address) {
         this.email = email;
